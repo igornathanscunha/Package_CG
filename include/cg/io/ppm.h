@@ -6,11 +6,12 @@
 #include "cg/image/rgb_image.h"
 
 void clear_comments(FILE* file);
-void extract_properties_rgb_image(FILE* fp, rgb_image* img);
+rgb_image extract_properties_rgb_image(FILE* fp);
 FILE* open_archive_ppm(const char* name);
 FILE* writing_archive_ppm(const char* name);
 // Estas funcoes usam os recursos recebidos; o chamador continua responsavel por fecha-los/libera-los.
 void load_image_in_matrix_rgb_color(FILE* fp, rgb_color* pixels, int WIDTH, int HEIGHT, uint8_t TYPE_IMG);
 void generate_rgb_image_ppm(FILE* fp, rgb_color* pixels, int WIDTH, int HEIGHT, uint8_t TYPE_IMG, uint8_t CMAX);
+void generate_gray_image_ppm(FILE* fp, gray_color* pixels, int WIDTH, int HEIGHT, uint8_t TYPE_IMG, uint8_t CMAX);
 
 #endif

@@ -16,7 +16,7 @@ int main (int argc, char**argv){
     rgb_image image;
 
     file = open_archive_ppm(argv[1]);
-    extract_properties_rgb_image(file, &image);
+    image = extract_properties_rgb_image(file);
     // Reserva memoria para os pixels e carrega os dados da imagem.
     image.pixels = create_a_matrix_from_an_rgb_color(image.WIDTH, image.HEIGHT);
     load_image_in_matrix_rgb_color(

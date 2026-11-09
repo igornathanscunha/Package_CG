@@ -13,6 +13,8 @@ typedef struct gray_image
     gray_color* pixels;
 }gray_image;
 
+gray_image create_gray_image(int WIDTH, int HEIGHT, uint8_t TYPE, uint8_t CMAX);
 gray_color* create_a_matrix_from_an_gray_color(int WIDTH, int HEIGHT);
+void coverte_rgb_color_in_gray_color(rgb_color* rgb, gray_color* gray, int WIDTH, int HEIGHT);
 
 #endif
