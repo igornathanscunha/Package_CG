@@ -23,6 +23,7 @@ int main (int argc, char**argv){
         file, image.pixels,
         image.WIDTH, image.HEIGHT, image.TYPE_IMG
     );
+    fclose(file);
 
     rgb_color* blur;
     // Cada iteracao aplica mais uma passagem do filtro 3x3; nao altera o raio da janela.
@@ -47,6 +48,8 @@ int main (int argc, char**argv){
         image.WIDTH, image.HEIGHT,
         image.TYPE_IMG, image.CMAX
     );
+    fclose(file);
+    free(image.pixels);
 
     return 0;
 }

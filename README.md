@@ -59,8 +59,6 @@ A interface do programa recebe os caminhos de entrada e saída:
 
 O ângulo está definido como 30 graus no código e a imagem de saída é alocada com o dobro da largura e da altura da original.
 
-**Limitação conhecida:** o exemplo compila, mas atualmente pode abortar durante a execução por uma liberação duplicada de memória após a gravação. Essa rotina precisa ser corrigida antes de usar o exemplo de rotação; o README não altera o comportamento do código.
-
 ## Estrutura do projeto
 
 ```text

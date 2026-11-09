@@ -68,13 +68,10 @@ void load_image_in_matrix_rgb_color(FILE* fp, rgb_color* pixels, int WIDTH, int 
     }
     else
     {
-        // Em formato invalido, encerra o arquivo e libera a matriz antes de sair.
+        // Em formato invalido, encerra o processo.
         perror("Formato de arquivo invalido!\n");
-        fclose(fp);
-        free(pixels);
         exit(1);
     }
-    fclose(fp);
 }
 
 // Escreve o cabecalho PPM e serializa os pixels no formato indicado.
@@ -101,6 +98,4 @@ void generate_rgb_image_ppm(FILE* fp, rgb_color* pixels,
             }
         }
     }
-    fclose(fp);
-    free(pixels);
 }
