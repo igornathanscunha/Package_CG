@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cg/image/rgb_image.h"
-
-// Cria uma imagem RGB e aloca a memoria necessaria para seus pixels.
-rgb_image create_rgb_image(int WIDTH, int HEIGHT, uint8_t TYPE, uint8_t CMAX)
-{
-    return (rgb_image){
-        WIDTH, HEIGHT, TYPE, CMAX,
-        create_a_matrix_from_an_rgb_color(WIDTH, HEIGHT)
-    };
-}
+#include "cg/image/color_properties/rgb_image.h"
 
 // Aloca um vetor linear com espaco para WIDTH * HEIGHT pixels RGB.
 rgb_color* create_a_matrix_from_an_rgb_color(int WIDTH, int HEIGHT)

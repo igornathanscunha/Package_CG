@@ -1,6 +1,8 @@
 #include <stdlib.h>
-#include "cg/image/blur.h"
-#include "cg/image/rgb_image.h"
+#include "cg/image/filters/rgb/blur.h"
+#include "cg/image/color_properties/rgb_image.h"
+
+static rgb_color average_of_nine_pixel(int x_i, int y_i, rgb_color* img, int WIDTH);
 
 // Acrescenta uma camada que replica os pixels das bordas para a janela 3x3.
 rgb_color* pad_rgb_image_replicate_edge(rgb_color* img, int WIDTH, int HEIGHT)
@@ -48,7 +50,7 @@ rgb_color* blur_rgb_image(rgb_color* img, int WIDTH, int HEIGHT)
 }
 
 // Calcula a media independente dos canais RGB na vizinhanca 3x3 do pixel.
-rgb_color average_of_nine_pixel(int x_i, int y_i, rgb_color* img, int WIDTH)
+static rgb_color average_of_nine_pixel(int x_i, int y_i, rgb_color* img, int WIDTH)
 {
     // A coordenada (x_i, y_i) aponta para o pixel central na imagem sem padding.
     int x = x_i + 1;
@@ -68,3 +70,4 @@ rgb_color average_of_nine_pixel(int x_i, int y_i, rgb_color* img, int WIDTH)
     uint8_t average_b = sum_b / 9;
     return (rgb_color){average_r, average_g, average_b};
 }
+

@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cg/image/rotate.h"
-#include "cg/image/rgb_image.h"
-#include "cg/io/ppm.h"
+#include "cg/image/geometric_transformations/rotate.h"
+#include "cg/image/color_properties/rgb_image.h"
+#include "cg/image/image_type/ppm.h"
+#include "cg/image/image_properties.h"
 
 
 int main (int argc, char **argv)
 {
     // O primeiro argumento identifica a imagem de entrada; o segundo, a de saida.
     FILE* file;
-    rgb_image image;
+    image_properties image;
 
     // Le o cabecalho PPM, ignorando comentarios antes dos campos.
     file = fopen(argv[1], "r");
@@ -19,9 +20,9 @@ int main (int argc, char **argv)
     fscanf(file, "%u %u\n%hhu\n", &image.WIDTH, &image.HEIGHT, &image.CMAX);
 
     // Reserva memoria para os pixels e carrega os dados.
-    image.pixels = create_a_matrix_from_an_rgb_color(image.WIDTH, image.HEIGHT);
+    rgb_color* pixels = create_a_matrix_from_an_rgb_color(image.WIDTH, image.HEIGHT);
     load_image_in_matrix_rgb_color(
-        file, image.pixels,
+        file, pixels,
         image.WIDTH, image.HEIGHT, image.TYPE_IMG
     );
     fclose(file);
@@ -33,7 +34,7 @@ int main (int argc, char **argv)
     // Grava a imagem com os mesmos dados e dimensoes da entrada.
     file = fopen(argv[2], "w");
     rotate_img = rotate_rgb_image(
-        image.pixels, image.WIDTH, image.HEIGHT, angle, false
+        pixels, image.WIDTH, image.HEIGHT, angle, false
     );
 
     generate_rgb_image_ppm(
@@ -45,7 +46,7 @@ int main (int argc, char **argv)
 
 
     // Libera a matriz alocada para armazenar os pixels.
-    free(image.pixels);
+    free(pixels);
     free(rotate_img);
     return 0;
 }

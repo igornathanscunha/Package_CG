@@ -1,6 +1,6 @@
-#include "cg/image/rotate.h"
-#include "cg/image/rgb_image.h"
-#include "cg/math/rotation2d.h"
+#include "cg/image/geometric_transformations/rotate.h"
+#include "cg/image/color_properties/rgb_image.h"
+#include "cg/geometry/geometric_transformations/rotation2d.h"
 
 void rotate_inverse_rgb_image_validate(rgb_color* rotate_image, rgb_color* pixels, int WIDTH, int HEIGHT, int angle)
 {

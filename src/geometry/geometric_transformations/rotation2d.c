@@ -1,5 +1,5 @@
 #include <math.h>
-#include "cg/math/rotation2d.h"
+#include "cg/geometry/geometric_transformations/rotation2d.h"
 
 // Converte o angulo em graus para a unidade esperada por sin, cos e tan.
 double degrees_to_radians(int angle)

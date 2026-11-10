@@ -1,25 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cg/io/ppm.h"
-
-// Consome comentarios PPM iniciados por '#' e devolve o proximo caractere util.
-void clear_comments(FILE* file)
-{
-    uint8_t caracter;
-    while ((caracter=getc(file))=='#')
-        while ((caracter=getc(file))!='\n');
-    ungetc(caracter, file);
-}
-
-rgb_image extract_properties_rgb_image(FILE* fp)
-{
-    rgb_image img;
-    clear_comments(fp);
-    fscanf(fp, "P%hhu\n", &img.TYPE_IMG);
-    clear_comments(fp);
-    fscanf(fp, "%u %u\n%hhu\n", &img.WIDTH, &img.HEIGHT, &img.CMAX);
-    return img;
-}
+#include "cg/image/image_type/ppm.h"
 
 FILE* open_archive_ppm(const char* name)
 {
@@ -66,6 +47,34 @@ void load_image_in_matrix_rgb_color(FILE* fp, rgb_color* pixels, int WIDTH, int 
                 pixels[i * WIDTH + j].r = rgb[0];
                 pixels[i * WIDTH + j].g = rgb[1];
                 pixels[i * WIDTH + j].b = rgb[2];
+            }
+    }
+    else
+    {
+        // Em formato invalido, encerra o processo.
+        perror("Formato de arquivo invalido!\n");
+        exit(1);
+    }
+}
+
+// Carrega os pixels do arquivo: P2 usa valores textuais e P5 usa bytes binarios.
+void load_image_in_matrix_gray_color(FILE* fp, gray_color* pixels, int WIDTH, int HEIGHT, uint8_t TYPE_IMG)
+{
+    if (TYPE_IMG == 2)
+    {
+        for (int j = 0; j < HEIGHT; j++)
+            for (int i = 0; i < WIDTH; i++)
+                fscanf(fp, "%hhu ",
+                       &pixels[j * WIDTH + i].scale);
+    }
+    else if (TYPE_IMG == 5)
+    {
+        for (int j = 0; j < HEIGHT; j++)
+            for (int i = 0; i < WIDTH; i++)
+            {
+                unsigned char scale[1];
+                fread(scale, 1, 1, fp);
+                pixels[j * WIDTH + i].scale = scale[0];
             }
     }
     else
